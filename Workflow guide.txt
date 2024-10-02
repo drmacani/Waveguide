@@ -1,0 +1,47 @@
+1. Start out by using the "split_video.py" to split the video of the 'checkerboard card.' 
+Then save the split images to a reference folder (such as 'calibration images')
+	a. Repeat this for the 'black square' calibration card 
+	   (if captured as a video, but you will only need one of this image).
+	b. Repeat again for the the video of your waveguide test measurement
+	c. Save all these to seperate folders
+
+2. Open the "Camera_calibration" matlab script. Use this script to undistort the images 
+of the checkerboard calibration card.
+	a. Load up the file directory using 'imageFileNames.' Use at least 5 images for accuracy
+	b. Run the script
+	c. Save the workspace results as 'Camera_calibration.mat'
+
+3. Open "Frame_reshaping" matlab script. 
+Use this script (and the calibration parameters saved in Camera_calibration.mat), 
+to undistort the 'black square' calibration image, and your waveguide test results. 
+This removes the barelling in your images, and allows you to accurately determine contact area measurements.
+	a. Load up the file path to 'images'
+	b. Use 'Save_dir' to set the folder you want to save the undistorted images
+	c. Run the script
+
+5. Open the "Pressure_distribution_all_graphs.py" script
+	a. Use 'path' to access the file directory of the undistorted 'black square' image
+	b. Use 'sublist1' to select one image from your directory
+	c. Run the script
+	d. Use the first histogram figure to determine the threshold for your image
+	e. Set this threshold in 'thresh'
+	f. Use 'pix_thresh' to set pixels threshold line, this removes artifacts from your image
+	g. Contact area conversion factor
+		i. The black square has a 15 mm x 15 mm dimension = an area of 225 mm^2
+		ii. Check the number of pixels shown in 'pixels'
+		iii. Divide 225 by the number of pixels
+		iv. This produces the conversion factor for further contact area calculations
+
+6. Repeat step 5, for your waveguide test results.
+	a. Use 'path' to access the file directory of the undistorted waveguide test results
+	b. Repeat steps b - f
+	   (Once you are happy with this)
+	c. open "pressure_distribution_quick.py" This helps process your results without showing
+	   graphs for each step. Reducing computational time for analysis.
+		i. Ensure that the threshold parameters, and converison factor are the same ones 
+		    you used in "Pressure_distribution_all_graphs.py"
+		ii. Run this script
+		iii. Save your results to a seperate folder (including the pixels_result, area_vs_time, pixels_vs_time etc.).
+
+
+
